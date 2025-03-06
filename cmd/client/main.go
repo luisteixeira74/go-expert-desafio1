@@ -4,17 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
-)
 
-// Estrutura para armazenar a cotação recebida do servidor
-type Cotacao struct {
-	Code       string `json:"code"`
-	CodeIn     string `json:"codein"`
-	Name       string `json:"name"`
-	Bid        string `json:"bid"`
-	CreateDate string `json:"create_date"`
-}
+	"github.com/luisteixeira74/go-expert-desafio1/internal/models"
+	"github.com/luisteixeira74/go-expert-desafio1/internal/utils"
+)
 
 func main() {
 	resp, err := http.Get("http://localhost:8080/cotacao")
@@ -30,11 +25,26 @@ func main() {
 		return
 	}
 
-	var cotacao Cotacao
+	if !json.Valid(body) {
+		log.Println("A resposta não é um JSON válido:", string(body))
+		return
+	}
+
+	// Decodifica o JSON
+	var cotacao models.Cotacao
 	if err := json.Unmarshal(body, &cotacao); err != nil {
 		fmt.Println("Erro ao converter JSON:", err)
 		return
 	}
 
-	fmt.Printf("Cotação do dólar: %s BRL\n", cotacao.Bid)
+	// Monta o conteúdo do arquivo
+	content := fmt.Sprintf("Dólar: %s\n", cotacao.Bid)
+
+	// Chama a função para salvar no arquivo
+	if err := utils.SalvarArquivoCotacao(content); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println("Cotação salva com sucesso!")
 }
