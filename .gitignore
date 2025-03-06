@@ -3,3 +3,6 @@ data/*
 
 # Mas não ignorar o próprio diretório data/
 !data/
+
+# Opcional: Permitir arquivos específicos dentro de data/ (exemplo: manter um README)
+!data/.gitkeep
