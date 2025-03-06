@@ -1,2 +1,5 @@
-data/cotacao.txt
-data/cotacoes.db
+# Ignorar todos os arquivos dentro do diretório data/
+data/*
+
+# Mas não ignorar o próprio diretório data/
+!data/
