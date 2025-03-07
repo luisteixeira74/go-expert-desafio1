@@ -14,7 +14,7 @@ import (
 // Handler para processar requisições do cliente
 func HandleCotacao(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// Criar um contexto com timeout de 200ms para a requisição HTTP
+		// Criar um contexto com timeout de 200ms para a requisição HTTP (aumentei para 300 para erro de deadline)
 		ctx, cancel := context.WithTimeout(r.Context(), 200*time.Millisecond)
 		defer cancel()
 
@@ -68,6 +68,6 @@ func HandleCotacao(db *sql.DB) http.HandlerFunc {
 
 		// Respondendo ao cliente
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(cotacao)
+		json.NewEncoder(w).Encode(cotacao.Bid)
 	}
 }
