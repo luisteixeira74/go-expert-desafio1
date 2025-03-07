@@ -9,7 +9,7 @@ import (
 // SalvarCotacao salva a cotação em um arquivo no diretório `data/`
 func SalvarArquivoCotacao(content string) error {
 	// Definir diretório e arquivo
-	dirPath := "data"
+	dirPath := "."
 	filePath := filepath.Join(dirPath, "cotacao.txt")
 
 	// Criar diretório se não existir

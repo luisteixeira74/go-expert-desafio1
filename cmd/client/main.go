@@ -54,5 +54,5 @@ func main() {
 		return
 	}
 
-	fmt.Println("Cotação salva com sucesso em data/cotacao.txt")
+	fmt.Println("Cotação salva com sucesso em cotacao.txt")
 }

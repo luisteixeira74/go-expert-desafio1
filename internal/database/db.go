@@ -9,7 +9,7 @@ import (
 
 // Função para conectar ao banco SQLite
 func ConnectDB() (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", "./data/cotacoes.db")
+	db, err := sql.Open("sqlite3", "./cotacoes.db")
 	if err != nil {
 		return nil, err
 	}
